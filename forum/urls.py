@@ -5,6 +5,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = [
     url(r'^messages/$', views.MessageList.as_view()),
     url(r'^messages/(?P<pk>[0-9]+)/$', views.MessageDetail.as_view()),
+    url(r'^topics/$', views.TopicList.as_view()),
+    url(r'^topics/(?P<pk>[0-9]+)/$', views.TopicDetail.as_view()),
+    url(r'^categories/$', views.CategoryList.as_view()),
+    url(r'^categories/(?P<pk>[0-9]+)/$', views.CategoryDetail.as_view()),
+    url(r'^comments/$', views.CommentList.as_view()),
+    url(r'^comments/(?P<pk>[0-9]+)/$', views.CommentDetail.as_view()),   
 ]
 urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls',

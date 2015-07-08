@@ -1,12 +1,12 @@
 from django.forms import widgets
 from rest_framework import serializers
-from forum.models import Message, UserProfile, Category, Topic
+from forum.models import *
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
         model = Message
-        fields = ('id', 'title', 'content', 'created', 'updated', 'userID', 'answerID')
+        fields = ('id', 'title', 'content', 'created', 'updated', 'userID', 'answerID', 'topicID')
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,10 +18,17 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'slug')
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
         model = Topic
-        fields = ('id', 'title', 'description', 'created', 'updated', 'imageURL','vues', 'created_by', 'category')
+        messages = MessageSerializer(source='get_messsages', read_only=True)
+        fields = ('id', 'title', 'description', 'created', 'updated', 'imageURL','vues', 'created_by', 'category', 'messages')
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        owner = serializers.ReadOnlyField(source='owner.username')
+        model = Comment
+        fields = ('id', 'content', 'created', 'user_comment', 'answer_message')
