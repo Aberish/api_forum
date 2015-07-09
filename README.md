@@ -82,8 +82,8 @@
 			"title": "Comment trouver un sujet ?",
 			"description": "Je cherche à trouver les sujets car je ne les trouve pas",
 			"imageUrl": "url/to/image.jpg",
-			"vues": 50,
-			"created_by": 53 (user_id),
+			"views": 50,
+			"creator": 53 (user_id),
 			"category": 22 (category_id)
 		},
 	]
@@ -110,40 +110,6 @@
 ```
 /topics/:topic_id + DELETE
 ```
-# Catégories
-#### Structure d'une catégorie ####
-```
-{
-	"data":[
-		{
-			"id": 1,
-			"name": "Général",
-			"slug": "general"
-		},
-	]
-}
-```
-## Gestion des catégories ##
-#### Lister les catégories ####
-```
-/categorys
-```
-#### Créer une catégorie ####
-```
-/categorys + POST
-```
-#### Voir le profil d'une catégorie ####
-```
-/categorys/:category_id
-```
-#### Mettre à jour une catégorie ####
-```
-/categorys/:category_id + PUT
-```
-#### Supprimer une catégorie ####
-```
-/categorys/:category_id + DELETE
-```
 # Messages
 #### Structure d'un message ####
 ```
@@ -153,8 +119,8 @@
 			"id": 1,
 			"title": "Voici la réponse",
 			"description": "JE pense qu'en fait tu dois investir dans des lunettes...",
-			"userID": 22 (user_id),
-			"topicID": 50 (topic_id)
+			"user": 22 (user_id),
+			"topic": 50 (topic_id)
 		},
 	]
 }
@@ -188,8 +154,8 @@
 		{
 			"id": 1,
 			"content": "Tu as raison ! Je valide !",
-			"userID": 22 (user_id),
-			"messageID": 50 (message_id)
+			"user": 22 (user_id),
+			"message": 50 (message_id)
 		},
 	]
 }
@@ -197,21 +163,21 @@
 ## Gestion des informations commentaires ##
 #### Lister les commentaires ####
 ```
-/coms
+/comments
 ```
 #### Créer un commentaire ####
 ```
-/coms + POST
+/comments + POST
 ```
 #### Voir le profil d'un commentaire ####
 ```
-/coms/:com_id
+/comments/:comments_id
 ```
 #### Mettre à jour un commentaire ####
 ```
-/coms/:com_id + PUT
+/comments/:comments_id + PUT
 ```
 #### Supprimer un commentaire ####
 ```
-/coms/:com_id + DELETE
+/comments/:comments_id + DELETE
 ```
