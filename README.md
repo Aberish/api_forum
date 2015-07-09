@@ -235,13 +235,13 @@
 ```
 #### Voir le profil d'un commentaire ####
 ```
-/types/:types_id
+/types/:type_id
 ```
 #### Mettre à jour un commentaire ####
 ```
-/types/:types_id + PUT
+/types/:type_id + PUT
 ```
 #### Supprimer un commentaire ####
 ```
-/types/:types_id + DELETE
+/types/:type_id + DELETE
 ```
