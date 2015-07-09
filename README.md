@@ -54,23 +54,23 @@
 ## Gestion des catégories ##
 #### Lister les catégories ####
 ```
-/categorys
+/categories
 ```
 #### Créer une catégorie ####
 ```
-/categorys + POST
+/categories + POST
 ```
 #### Voir le profil d'une catégorie ####
 ```
-/categorys/:category_id
+/categories/:category_id
 ```
 #### Mettre à jour une catégorie ####
 ```
-/categorys/:category_id + PUT
+/categories/:category_id + PUT
 ```
 #### Supprimer une catégorie ####
 ```
-/categorys/:category_id + DELETE
+/categories/:category_id + DELETE
 ```
 # Topics
 #### Structure d'un topic ####
@@ -81,10 +81,28 @@
 			"id": 1,
 			"title": "Comment trouver un sujet ?",
 			"description": "Je cherche à trouver les sujets car je ne les trouve pas",
+            "created": "2015-07-09T08:12:16Z",
+            "updated": "2015-07-09T08:12:16Z",
 			"imageUrl": "url/to/image.jpg",
 			"views": 50,
-			"creator": 53 (user_id),
-			"category": 22 (category_id)
+			"creator": {
+			    "id": 22,
+			    "username": "Cliko"
+		    },
+		    "messages": [
+            	{
+			        "id": 1,
+			        "title": "Voici la réponse",
+			        "content": "JE pense qu'en fait tu dois investir dans des lunettes...",
+                    "created": "2015-07-09T08:12:46Z",
+                    "updated": "2015-07-09T08:12:46Z",
+			        "user": 22 (user_id),
+			        "topic": 50 (topic_id)
+		        },
+		    ],
+			"category": 22 (category_id),
+			"type_topic": 1 (type_id),
+			"favorite_topics": [1, 2] (user_id)
 		},
 	]
 }
@@ -118,9 +136,20 @@
 		{
 			"id": 1,
 			"title": "Voici la réponse",
-			"description": "JE pense qu'en fait tu dois investir dans des lunettes...",
+			"content": "JE pense qu'en fait tu dois investir dans des lunettes...",
+            "created": "2015-07-09T08:12:46Z",
+            "updated": "2015-07-09T08:12:46Z",
 			"user": 22 (user_id),
 			"topic": 50 (topic_id)
+			"comments"[
+						{
+							"id": 1,
+							"content": "Tu as raison ! Je valide !",
+							"created": "2015-07-09T13:34:15Z",
+							"user": 22 (user_id),
+							"message": 50 (message_id)
+						},
+			]
 		},
 	]
 }
@@ -154,6 +183,7 @@
 		{
 			"id": 1,
 			"content": "Tu as raison ! Je valide !",
+			"created": "2015-07-09T13:34:15Z",
 			"user": 22 (user_id),
 			"message": 50 (message_id)
 		},
@@ -180,4 +210,38 @@
 #### Supprimer un commentaire ####
 ```
 /comments/:comments_id + DELETE
+```
+
+# Types
+#### Structure d'un type ####
+```
+{
+	"data":[
+		{
+			"id": 1,
+			"name": "Question"
+		},
+	]
+}
+```
+## Gestion des informations des types ##
+#### Lister les commentaires ####
+```
+/types
+```
+#### Créer un commentaire ####
+```
+/types + POST
+```
+#### Voir le profil d'un commentaire ####
+```
+/types/:types_id
+```
+#### Mettre à jour un commentaire ####
+```
+/types/:types_id + PUT
+```
+#### Supprimer un commentaire ####
+```
+/types/:types_id + DELETE
 ```

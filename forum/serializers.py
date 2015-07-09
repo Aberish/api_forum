@@ -1,34 +1,57 @@
 from django.forms import widgets
 from rest_framework import serializers
 from forum.models import *
-
-class MessageSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
+        model = Comment
+        fields = ('id', 'content', 'created', 'user', 'message')
+
+class MessageSerializer(serializers.ModelSerializer):
+    comments=CommentSerializer(many=True)
+    class Meta:
         model = Message
-        fields = ('id', 'title', 'content', 'created', 'updated', 'userID', 'answerID', 'topicID')
+        fields = ('id', 'title', 'content', 'created', 'updated', 'user', 'topic', 'comments')
+
+class UserProfileOnlySerializer(serializers.ModelSerializer):
+    class Meta:
+        owner = serializers.ReadOnlyField(source='owner.username')
+        model = UserProfile
+        fields = ('id', 'username')
+
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
         model = UserProfile
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'age', 'profile_picture')
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        owner = serializers.ReadOnlyField(source='owner.username')
-        model = Category
-        fields = ('id', 'name', 'slug')
+        fields = ('id', 'username','email', 'first_name', 'last_name', 'password', 'age', 'profile_picture')
 
 class TopicSerializer(serializers.ModelSerializer):
+    messages = MessageSerializer(many=True)
+    creator = UserProfileOnlySerializer(many=False)
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
         model = Topic
-        messages = MessageSerializer(source='get_messsages', read_only=True)
-        fields = ('id', 'title', 'description', 'created', 'updated', 'imageURL','vues', 'created_by', 'category', 'messages')
+        fields = ('id', 'title', 'description', 'created', 'updated', 'imageURL','views', 'creator', 'messages', 'category', 'type_topic', 'favorite_topics')
 
-class CommentSerializer(serializers.ModelSerializer):
+class TopicFilterSerializer(serializers.ModelSerializer):
+    creator = UserProfileOnlySerializer(many=False)
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
-        model = Comment
-        fields = ('id', 'content', 'created', 'user_comment', 'answer_message')
+        model = Topic
+        fields = ('id', 'title', 'description', 'created', 'updated', 'imageURL','views', 'creator')
+
+class CategorySerializer(serializers.ModelSerializer):
+    topics = TopicFilterSerializer(many=True)
+    class Meta:
+        owner = serializers.ReadOnlyField(source='owner.username')
+        model = Category
+        fields = ('id', 'name', 'slug', 'topics')
+
+
+
+class TypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        owner = serializers.ReadOnlyField(source='owner.username')
+        model = Type
+        fields = ('id', 'name')
