@@ -13,6 +13,9 @@
 			"password": "password",
 			"age": "22",
 			"profile_picture": "url/to/image.jpg"
+			"topic_set": [
+                "Topic"
+            ]
 		},
 	]
 }
@@ -47,6 +50,21 @@
 			"id": 1,
 			"name": "Général",
 			"slug": "general"
+			"topics": [
+            {
+                "id": 3,
+                "title": "Topic 1",
+                "description": "Topic",
+                "created": "2015-07-10T07:28:31Z",
+                "updated": "2015-07-10T07:28:31Z",
+                "imageURL": null,
+                "views": 0,
+                "creator": {
+                    "id": 1,
+                    "username": "alberish"
+                }
+            }
+        ]
 		},
 	]
 }
