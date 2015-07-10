@@ -30,12 +30,13 @@ class Topic(models.Model):
     updated = models.DateTimeField(auto_now_add=True)
     imageURL = models.ImageField(upload_to='assets/topic', blank=True)
     views = models.IntegerField(default=0)
-    creator = models.ForeignKey(UserProfile, related_name='topics')
-    category = models.ForeignKey(Category, related_name='topics')
-    type_topic = models.ForeignKey(Type, related_name='topics')
+    creator = models.ForeignKey(UserProfile, related_name='creator_topics')
+    category = models.ForeignKey(Category, related_name='category_topics')
+    type_topic = models.ForeignKey(Type, related_name='type_topics')
     favorite_topics = models.ManyToManyField(UserProfile, blank=True)
     def __unicode__(self):
         return u'%s' % (self.title)
+
 class Message(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     content = models.TextField()
@@ -46,6 +47,7 @@ class Message(models.Model):
     favorite_message = models.ManyToManyField(UserProfile, blank=True)
     def __unicode__(self):
         return u'%s' % (self.title)
+
 class Comment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

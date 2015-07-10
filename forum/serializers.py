@@ -21,10 +21,11 @@ class UserProfileOnlySerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    topic_set = serializers.StringRelatedField(many=True)
     class Meta:
         owner = serializers.ReadOnlyField(source='owner.username')
         model = UserProfile
-        fields = ('id', 'username','email', 'first_name', 'last_name', 'password', 'age', 'profile_picture')
+        fields = ('id', 'username','email', 'first_name', 'last_name', 'password', 'age', 'profile_picture', 'topic_set')
 
 class TopicSerializer(serializers.ModelSerializer):
     messages = MessageSerializer(many=True)

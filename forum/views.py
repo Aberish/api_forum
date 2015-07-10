@@ -10,11 +10,10 @@ from forum.serializers import *
 from rest_framework import viewsets
 from django.http import Http404
 from rest_framework.views import APIView
-from rest_framework import mixins
-from rest_framework import generics
-from rest_framework import permissions
+from rest_framework import mixins, generics, permissions, filters
 from rest_framework.reverse import reverse
 # Create your views here.
+
 class UserProfileList(APIView):
     """
     List all users, or create a new user.
